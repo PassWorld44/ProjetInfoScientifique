@@ -144,8 +144,13 @@ function floodfill(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tupl
 			end
 		end
 	end
-	
-	return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+
+	if(finish)
+		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	else
+		#on ne peut pas construire le chemin (comme il n'y en a pas)
+		return (distFinal, Vector{Tuple{Int64, Int64}}(), nbrSeen, isSeen)
+	end
 end
 
 function costDepl( map::Vector{String}, nextPos::Tuple{Int64, Int64})
@@ -237,7 +242,12 @@ function dijkstra(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple
 		end
 	end
 	
-	return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	if(finish)
+		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	else
+		#on ne peut pas construire le chemin (comme il n'y en a pas)
+		return (distFinal, Vector{Tuple{Int64, Int64}}(), nbrSeen, isSeen)
+	end
 end
 
 function manhattanDist( p1::Tuple{Int64, Int64}, p2::Tuple{Int64, Int64})
@@ -319,7 +329,12 @@ function Astar(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple{In
 		end
 	end
 	
-	return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	if(finish)
+		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	else
+		#on ne peut pas construire le chemin (comme il n'y en a pas)
+		return (distFinal, Vector{Tuple{Int64, Int64}}(), nbrSeen, isSeen)
+	end
 end
 
 function WAstar(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple{Int64, Int64}, w::Float64)
@@ -397,7 +412,12 @@ function WAstar(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple{I
 		end
 	end
 	
-	return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	if(finish)
+		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
+	else
+		#on ne peut pas construire le chemin (comme il n'y en a pas)
+		return (distFinal, Vector{Tuple{Int64, Int64}}(), nbrSeen, isSeen)
+	end
 end
 
 function algoFloodFill(fname::String, d::Tuple{Int64, Int64}, f::Tuple{Int64, Int64} )
