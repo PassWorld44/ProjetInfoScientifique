@@ -64,6 +64,7 @@ function buildPath(predessesorMap::Array{Tuple{Int64, Int64}}, f::Tuple{Int64, I
 	current::Tuple{Int64, Int64} = f
 	
 	while (current != (0,0) )
+	
 		pushfirst!(path, current)
 		current = predessesorMap[CartesianIndex(current)]
 	end
@@ -145,7 +146,7 @@ function floodfill(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tupl
 		end
 	end
 
-	if(finish)
+	if(is_finished)
 		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
 	else
 		#on ne peut pas construire le chemin (comme il n'y en a pas)
@@ -242,7 +243,7 @@ function dijkstra(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple
 		end
 	end
 	
-	if(finish)
+	if(is_finished)
 		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
 	else
 		#on ne peut pas construire le chemin (comme il n'y en a pas)
@@ -329,7 +330,7 @@ function Astar(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple{In
 		end
 	end
 	
-	if(finish)
+	if(is_finished)
 		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
 	else
 		#on ne peut pas construire le chemin (comme il n'y en a pas)
@@ -412,7 +413,7 @@ function WAstar(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple{I
 		end
 	end
 	
-	if(finish)
+	if(is_finished)
 		return (distFinal, buildPath(predessesorMap, finish), nbrSeen, isSeen)
 	else
 		#on ne peut pas construire le chemin (comme il n'y en a pas)
@@ -421,22 +422,22 @@ function WAstar(map::Vector{String}, start::Tuple{Int64, Int64}, finish::Tuple{I
 end
 
 function algoFloodFill(fname::String, d::Tuple{Int64, Int64}, f::Tuple{Int64, Int64} )
-	map = parse("theglaive.map")
+	map = parse(fname)
 	floodfill(map, d, f)
 end
 
 function algoDijsktra(fname::String, d::Tuple{Int64, Int64}, f::Tuple{Int64, Int64} )
-	map = parse("theglaive.map")
+	map = parse(fname)
 	dijkstra(map, d, f)
 end
 
 function algoAstar(fname::String, d::Tuple{Int64, Int64}, f::Tuple{Int64, Int64} )
-	map = parse("theglaive.map")
+	map = parse(fname)
 	Astar(map, d, f)
 end
 
 function algoWAstar(fname::String, d::Tuple{Int64, Int64}, f::Tuple{Int64, Int64}, w::Float64)
-	map = parse("theglaive.map")
+	map = parse(fname)
 	WAstar(map, d, f, w)
 end
 
