@@ -11,5 +11,5 @@ Utilisation des packages `DataStructures` (pour utiliser une implémentation d'u
 ### Utilisation :
 
 les fonctions `algoFloodFill`, `algoDijsktra`, `algoAstar` et `algoWAstar` peuvent être utulisées individuellement \
-La fonction `testAlgos` permet de tester ces implementations, et de donner un affichage du temps d'éxecution et du nombre d'états visités.
-La fonction `testWAstar` permet de comparer differentes valeur de w pour Astar (valeurs predefinies).
+La fonction `testAlgos` permet de tester ces implementations, et de donner un affichage du temps d'éxecution et du nombre d'états visités, ainsi qu'un affichage graphique des résultats.
+La fonction `testWAstar` permet de comparer differentes valeur de w pour Astar (valeurs predefinies) de la même manière que `testAlgos`.
