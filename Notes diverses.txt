@@ -1,0 +1,51 @@
+Notes diverses
+
+hoix d'implementation :
+
+	implementation de Floodfill ; Dijkstra ; A* ; WA*
+	
+	carte : Vector{String} (pas de calcul a refaire une fois les lignes dans le fichier de la carte lues)
+	tas min (trie par la disance ou distance + manhattan pour A* et WA* ; stoque aussi les distances)
+	tableau de Bool des cases deja vues (initialise a false)
+	tableau des predecesseurs (non initialise)
+
+	chemin reconstruit avec le tableau des predecesseurs une fois la case d'arrivee trouvee ; distance sauvegardee dans le tas
+	(si le chemin existe, sinon distance de 0 et chemin vide)
+
+reflexions sur des optimisations :
+	
+	tas de fibonnachi avec meilleure complexite asymptotique mais pire que des tas en pratique
+	-> choix d'un simple tas
+
+	ne pas initialiser le tableau des predecesseurs : inutile car on repasse uniquement sur le chemin qui a ete traite
+
+	limiter le fait de mettre des voisins dans la pile : limite la taille de la principale structure de donnee -> plus rapide
+
+observations sur WA* : 
+	(pour `d(c) + w*h(c) avec w >= 1 constante)
+
+	globalement augmenter w reduit presque toujours le nombres d'etats visites, souvent au prix de l'optimalite de la solution (qui 'empire' selon qu'on augmente w)
+
+	dans des cas ou il n'y a pas bcp d'exploration possible (labyrithe tres serre) augmenter w ne semble pas empirer la solution
+
+	il semble possible de faire un /5 des etats visites avec meme des valeurs tres faibles de w sur des cartes avec bcp d'espace
+
+	parfois (dans les grands labyrinthes avec de grandes cases) cherche trop a aller tout droit ; explore pas assez pour voir les portes et se retrouve a explorer plus de cases que pour des w plus petit (explore des parties des cases pas super utiles en priorite)
+
+	quand pas de chemin existe ; tout les algos (Floodfill, ) ; exploration totale de la zone possible
+
+	interpretation : l'algo tente plus de "se diriger directement" vers l'arrivee, explore moins
+						c'est tres interessant quand il y a des tres grandes etendues (mais parfois voit pas qu'un passage existe en coupant dans le vide pasque n'explore pas assez pour le voir ; perte d'optimalite)
+
+
+idees d'amelioration de l'algo (non implementees) :
+	l'algo n'est pas specialement optimise pour des graphes en grilles avec bcp d'espaces vides (qui correspondent plus aux cas reels avec des cartes de jeux video avec de grand espaces vides ou cartes de villes); c'est surement possible d'exploiter cette structure la ici
+
+	idee : alterner entre 'foncer vers la solution' et longer les murs vers la bonne direction (explorer de grandes etendues lies a la partie de Dijkstra dans WA* ne semple pas super obtimal) jusqu'a trouver des 'portes' et ensuite optimiser ce chemin en essayant de raccourcir la distance entre les 'portes' (pour couper les etendues plutot que de longer les murs)
+
+	permet d'ameliorer aussi le cas ou il n'y a pas de chemin : il suffit de longer les murs qui bloquent pour faire le tour pour voir qu'il n'y a pas de solution
+
+idee d'amelion de l'implementation (non implementee) :
+	stoquer la carte de maniere a garder une certaine proximite en memoire entre des zones proches geographiquement (permet d'eviter une recharge du cache ; arrive dans mon implementation 3x par cases : chargement de la case ; et pour voir au dessus et en dessous)
+	potentiellement fesable avec une space-filling curve ?
+	(je sais pas si c'est tres utile dans des petites instances)
