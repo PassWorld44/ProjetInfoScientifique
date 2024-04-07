@@ -1,7 +1,7 @@
 # ProjetInfoScientifique
 
 Ceci est un projet réalisé pour l'UE "Projet d'informatique scientifique" dans le cadre de la licence 3 Informatique-Mathématiques CMI OPTIM à l'université de Nantes. \
-Il s'agit d'implémentation d'algorithmes de plus court chemin (Floodfill, Dijsktyra, A*) en julia
+Il s'agit d'implémentation d'algorithmes de plus court chemin (Floodfill, Dijsktyra, A*, WA*) en julia
 
 ### Packages
 Utilisation des packages `DataStructures` (pour utiliser une implémentation d'un tas min) ;\
